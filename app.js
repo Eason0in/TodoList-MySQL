@@ -10,10 +10,9 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-// app.use("/", require("./routes/home"));
-// app.use("/todos", require("./routes/todo"));
-// app.use("/users", require("./routes/user"));
-// app.use("/auth", require("./routes/auths"));
+const db = require("./models");
+const Todo = db.Todo;
+const User = db.User;
 
 // 首頁
 app.get("/", (req, res) => {
@@ -33,12 +32,22 @@ app.get("/users/register", (req, res) => {
 });
 // 註冊檢查
 app.post("/users/register", (req, res) => {
-  res.send("register");
+  User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  }).then(user => res.redirect("/"));
 });
 // 登出
 app.get("/users/logout", (req, res) => {
   res.send("logout");
 });
 app.listen(port, () => {
+  db.sequelize.sync();
   console.log(`app is running http://localhost:${port}`);
 });
+
+// app.use("/", require("./routes/home"));
+// app.use("/todos", require("./routes/todo"));
+// app.use("/users", require("./routes/user"));
+// app.use("/auth", require("./routes/auths"));
