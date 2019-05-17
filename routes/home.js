@@ -1,9 +1,12 @@
 const express = require('express')
-const route = express.Router()
+const router = express.Router()
+const db = require('../models')
+const User = db.User
+const Todo = db.Todo
 const { authenticated } = require('../config/auth')
 
-route.get('/', (req, res) => {
-  res.render('index')
+router.get('/', (req, res) => {
+  res.send('列出全部Todo')
 })
 
-module.exports = route
+module.exports = router
