@@ -5,8 +5,19 @@ const User = db.User
 const Todo = db.Todo
 const { authenticated } = require('../config/auth')
 
-router.get('/', (req, res) => {
-  res.send('列出全部Todo')
+router.get('/', authenticated, (req, res) => {
+  User.findByPk(req.user.id)
+    .then(user => {
+      if (!user) {
+        return res.error()
+      }
+      Todo.findAll({ where: { userId: req.user.id } }).then(todos => {
+        return res.render('index', { todos })
+      })
+    })
+    .catch(error => {
+      return res.status(422).json(error)
+    })
 })
 
 module.exports = router
