@@ -1,10 +1,3 @@
-{{!-- <p>{{detail.name}}</p>
-<a href="/">back</a>
-<a href="/todo/edit/{{detail.id}}">edit</a>
-<a href="/todo/delete/{{detail.id}}">delete</a> --}}
-
-{{!-- <button type="submit">delete</button> --}}
-
 <form action="/todos/delete/{{{detail.id}}}?_method=DELETE" method="post" style="display:inline">
   <div class="input-group">
     <div class="input-group-prepend">
