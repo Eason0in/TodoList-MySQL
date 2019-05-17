@@ -1,21 +1,21 @@
-const express = require("express");
-const route = express.Router();
-const { authenticated } = require("../config/auth");
-const db = require("../models");
-const Todo = db.Todo;
+const express = require('express')
+const route = express.Router()
+const { authenticated } = require('../config/auth')
+const db = require('../models')
+const Todo = db.Todo
 
 //載入新增頁面
-route.get("/new", (req, res) => {
-  res.render("new");
-});
+route.get('/new', (req, res) => {
+  res.render('new')
+})
 
 //新增頁面-點選新增
-route.post("/new", (req, res) => {
+route.post('/new', (req, res) => {
   Todo.create({
     name: req.body.name,
     done: false
-  }).then(todo => res.redirect("/"));
-});
+  }).then(todo => res.redirect('/'))
+})
 
 // //載入詳細資料頁面
 // route.get("/detail/:id", authenticated, (req, res) => {
@@ -57,4 +57,4 @@ route.post("/new", (req, res) => {
 //   });
 // });
 
-module.exports = route;
+module.exports = route

@@ -1,9 +1,9 @@
-const express = require("express");
-const route = express.Router();
-const { authenticated } = require("../config/auth");
+const express = require('express')
+const route = express.Router()
+const { authenticated } = require('../config/auth')
 
-route.get("/", (req, res) => {
-  res.render("index");
-});
+route.get('/', (req, res) => {
+  res.render('index')
+})
 
-module.exports = route;
+module.exports = route
