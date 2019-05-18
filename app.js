@@ -27,10 +27,7 @@ app.use((req, res, next) => {
   res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
-
-app.use('/', require('./routes/home'))
-app.use('/todos', require('./routes/todo'))
-app.use('/users', require('./routes/user'))
+app.use(require('./routes'))
 
 app.listen(port, () => {
   db.sequelize.sync()
